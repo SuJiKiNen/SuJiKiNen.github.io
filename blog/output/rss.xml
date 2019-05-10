@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SuJiKiNen's Blog</title><link>https://SuJiKiNen.github.io/</link><description>Personal notes.</description><atom:link href="https://SuJiKiNen.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2019 &lt;a href="mailto:sujikinen@[dot]gmail[dot]com"&gt;SuJiKiNen&lt;/a&gt; </copyright><lastBuildDate>Fri, 10 May 2019 02:25:04 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>非Root用户，Docker挂载卷后写的文件为Root权限</title><link>https://SuJiKiNen.github.io/posts/fei-rootyong-hu-dockergua-zai-juan-hou-xie-de-wen-jian-wei-rootquan-xian/</link><dc:creator>SuJiKiNen</dc:creator><description>&lt;div&gt;&lt;h4&gt;description:&lt;/h4&gt;
+&lt;p&gt;执行挂载操作的用户的uid和gid会映射到docker里运行.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Host uid == container uid&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Host gid == container gid&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;如果Docker里的程序创建了其他用户,那写出来的文件,宿主机
+可能没有对应的用户,注意只是根据uid和gid来判断,即使有
+相同的uid和gid显示的用户名可能还是不同的.&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;uid&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gid&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;uname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gname&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="k"&gt;Host&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt; &lt;span class="k"&gt;RIGHT&lt;/span&gt; &lt;span class="k"&gt;JOIN&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+   &lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;uid&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;gid&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;Container&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;C&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;uid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;C&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;uid&lt;/span&gt; &lt;span class="k"&gt;AND&lt;/span&gt; &lt;span class="n"&gt;H&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;C&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gid&lt;/span&gt;
+&lt;/pre&gt;
+
+
+&lt;h4&gt;Solutions:&lt;/h4&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;docker run --user $(id -u):$(id -g) other_options&lt;/span&gt;
+&lt;/pre&gt;
+
+
+&lt;p&gt;注意如果环境变量没有设置&lt;code&gt;$UID&lt;/code&gt;和&lt;code&gt;$GID&lt;/code&gt;,&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;WARNING: The UID variable is not set. Defaulting to a blank string.
+WARNING: The GID variable is not set. Defaulting to a blank string.
+&lt;/pre&gt;
+
+
+&lt;p&gt;使用如下命令执行&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;UID=$(id -u) GID=$(id -g) docker-compose&lt;/code&gt;&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;version: '3'
+services:
+  db:
+    image: image_name
+    user: &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;UID&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;:&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;GID&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</description><guid>https://SuJiKiNen.github.io/posts/fei-rootyong-hu-dockergua-zai-juan-hou-xie-de-wen-jian-wei-rootquan-xian/</guid><pubDate>Fri, 10 May 2019 01:18:53 GMT</pubDate></item></channel></rss>

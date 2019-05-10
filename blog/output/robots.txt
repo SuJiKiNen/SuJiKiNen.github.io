@@ -1,0 +1,4 @@
+Sitemap: https://SuJiKiNen.github.io/sitemapindex.xml
+
+User-Agent: *
+Host: SuJiKiNen.github.io

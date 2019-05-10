@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Personal notes.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SuJiKiNen's Blog</title>
+<link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+<link rel="canonical" href="https://SuJiKiNen.github.io/">
+<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/fei-rootyong-hu-dockergua-zai-juan-hou-xie-de-wen-jian-wei-rootquan-xian/" type="text/html">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+
+<!-- Header and menu bar -->
+<div class="container">
+      <header class="blog-header py-3"><div class="row nbb-header align-items-center">
+          <div class="col-md-3 col-xs-2 col-sm-2" style="width: auto;">
+            <button class="navbar-toggler navbar-light bg-light nbb-navbar-toggler" type="button" data-toggle="collapse" data-target=".bs-nav-collapsible" aria-controls="bs-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse bs-nav-collapsible bootblog4-search-form-holder">
+                
+            </div>
+        </div>
+          <div class="col-md-6 col-xs-10 col-sm-10 bootblog4-brand" style="width: auto;">
+            <a class="navbar-brand blog-header-logo text-dark" href="https://SuJiKiNen.github.io/">
+
+            <span id="blog-title">SuJiKiNen's Blog</span>
+        </a>
+          </div>
+            <div class="col-md-3 justify-content-end align-items-center bs-nav-collapsible collapse flex-collapse bootblog4-right-nav">
+            <nav class="navbar navbar-light bg-white"><ul class="navbar-nav bootblog4-right-nav"></ul></nav>
+</div>
+    </div>
+</header><nav class="navbar navbar-expand-md navbar-light bg-white static-top"><div class="collapse navbar-collapse bs-nav-collapsible" id="bs-navbar">
+            <ul class="navbar-nav nav-fill d-flex w-100">
+<li class="nav-item">
+<a href="archive.html" class="nav-link">文章归档</a>
+                </li>
+<li class="nav-item">
+<a href="categories/" class="nav-link">标签</a>
+                </li>
+<li class="nav-item">
+<a href="rss.xml" class="nav-link">RSS 源</a>
+
+                
+            </li>
+</ul>
+</div>
+<!-- /.navbar-collapse -->
+</nav>
+</div>
+
+<div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        
+        
+    
+        
+
+    
+        
+    <div class="postindex">
+            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/fei-rootyong-hu-dockergua-zai-juan-hou-xie-de-wen-jian-wei-rootquan-xian/" class="u-url">非Root用户，Docker挂载卷后写的文件为Root权限</a></h1>
+                <div class="metadata">
+                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                        SuJiKiNen
+                    </span></p>
+            <p class="dateline">
+            <a href="posts/fei-rootyong-hu-dockergua-zai-juan-hou-xie-de-wen-jian-wei-rootquan-xian/" rel="bookmark">
+            <time class="published dt-published" datetime="2019-05-10T09:18:53+08:00" itemprop="datePublished" title="2019-05-10 09:18">2019-05-10 09:18</time></a>
+            </p>
+                </div>
+            </header><div class="e-content entry-content">
+                    <div>
+<h4>description:</h4>
+<p>执行挂载操作的用户的uid和gid会映射到docker里运行.</p>
+<p><code>Host uid == container uid</code></p>
+<p><code>Host gid == container gid</code></p>
+<p>如果Docker里的程序创建了其他用户,那写出来的文件,宿主机
+可能没有对应的用户,注意只是根据uid和gid来判断,即使有
+相同的uid和gid显示的用户名可能还是不同的.</p>
+<pre class="code literal-block"><span></span><span class="k">SELECT</span> <span class="n">H</span><span class="p">.</span><span class="n">uid</span><span class="p">,</span> <span class="n">H</span><span class="p">.</span><span class="n">gid</span><span class="p">,</span> <span class="n">H</span><span class="p">.</span><span class="n">uname</span><span class="p">,</span><span class="n">H</span><span class="p">.</span><span class="n">gname</span> <span class="k">FROM</span> <span class="k">Host</span> <span class="n">H</span> <span class="k">RIGHT</span> <span class="k">JOIN</span> <span class="p">(</span>
+   <span class="k">SELECT</span> <span class="n">uid</span><span class="p">,</span> <span class="n">gid</span> <span class="k">FROM</span> <span class="n">Container</span>
+<span class="p">)</span> <span class="k">C</span> <span class="k">ON</span> <span class="n">H</span><span class="p">.</span><span class="n">uid</span> <span class="o">=</span> <span class="k">C</span><span class="p">.</span><span class="n">uid</span> <span class="k">AND</span> <span class="n">H</span><span class="p">.</span><span class="n">gid</span> <span class="o">=</span> <span class="k">C</span><span class="p">.</span><span class="n">gid</span>
+</pre>
+
+
+<h4>Solutions:</h4>
+<pre class="code literal-block"><span></span><span class="l l-Scalar l-Scalar-Plain">docker run --user $(id -u):$(id -g) other_options</span>
+</pre>
+
+
+<p>注意如果环境变量没有设置<code>$UID</code>和<code>$GID</code>,</p>
+<pre class="code literal-block"><span></span>WARNING: The UID variable is not set. Defaulting to a blank string.
+WARNING: The GID variable is not set. Defaulting to a blank string.
+</pre>
+
+
+<p>使用如下命令执行</p>
+<p><code>UID=$(id -u) GID=$(id -g) docker-compose</code></p>
+<pre class="code literal-block"><span></span>version: '3'
+services:
+  db:
+    image: image_name
+    user: <span class="cp">${</span><span class="n">UID</span><span class="cp">}</span>:<span class="cp">${</span><span class="n">GID</span><span class="cp">}</span>
+</pre>
+</div>
+                </div>
+            </article>
+</div>
+    
+
+    
+
+    
+
+
+        <!--End of body content-->
+
+        <footer id="footer">
+            Contents © 2019         <a href="mailto:sujikinen@%5Bdot%5Dgmail%5Bdot%5Dcom">SuJiKiNen</a> - Powered by <a href="https://www.gnu.org/software/emacs/" rel="nofollow">Emacs</a> and <a href="https://getnikola.com" rel="nofollow">Nikola</a>       
+            
+        </footer>
+</div>
+</div>
+
+
+        <script src="assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

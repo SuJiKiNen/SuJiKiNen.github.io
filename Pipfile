@@ -6,7 +6,7 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-nikola = {index = "http://pypi.douban.com/simple/",extras = ["extras"],version = "*"}
+nikola = {index = "http://mirrors.aliyun.com/pypi/simple/",version = "*"}
 
 [requires]
 python_version = "3.6"

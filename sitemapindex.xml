@@ -6,15 +6,27 @@
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <sitemap>
+  <loc>https://SuJiKiNen.github.io/categories/deepstream.xml</loc>
+  <lastmod>2020-03-01T04:59:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://SuJiKiNen.github.io/categories/docker.xml</loc>
+  <lastmod>2020-03-01T04:59:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://SuJiKiNen.github.io/categories/nvidia.xml</loc>
+  <lastmod>2020-03-01T04:59:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://SuJiKiNen.github.io/galleries/rss.xml</loc>
-  <lastmod>2019-05-10T02:09:00Z</lastmod>
+  <lastmod>2020-02-04T12:11:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://SuJiKiNen.github.io/rss.xml</loc>
-  <lastmod>2019-05-10T02:06:00Z</lastmod>
+  <lastmod>2020-03-01T04:59:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://SuJiKiNen.github.io/sitemap.xml</loc>
-  <lastmod>2019-05-10T02:09:00Z</lastmod>
+  <lastmod>2020-03-01T04:59:00Z</lastmod>
  </sitemap>
 </sitemapindex>

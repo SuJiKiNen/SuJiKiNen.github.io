@@ -2,7 +2,7 @@
 .. title: 非Root用户，Docker挂载卷后写的文件为Root权限
 .. slug: fei-rootyong-hu-dockergua-zai-juan-hou-xie-de-wen-jian-wei-rootquan-xian
 .. date: 2019-05-10 09:18:53 UTC+08:00
-.. tags:
+.. tags: docker
 .. category:
 .. link:
 .. description:

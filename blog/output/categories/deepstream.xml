@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SuJiKiNen's Blog (关于文章 deepstream)</title><link>https://SuJiKiNen.github.io/</link><description></description><atom:link href="https://SuJiKiNen.github.io/categories/deepstream.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2020 &lt;a href="mailto:sujikinen@[dot]gmail[dot]com"&gt;SuJiKiNen&lt;/a&gt; </copyright><lastBuildDate>Sun, 01 Mar 2020 04:59:59 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>使用代理下载 Nvidia Deepstream 镜像</title><link>https://SuJiKiNen.github.io/posts/shi-yong-dai-li-xia-zai-nvidia-deepstreamjing-xiang/</link><dc:creator>SuJiKiNen</dc:creator><description>&lt;p&gt;
+Deepstream 镜像很大,特别是 &lt;code&gt;-devel&lt;/code&gt; 结尾的开发镜像
+&lt;/p&gt;
+
+&lt;p&gt;
+必须要设置代理才行,通常设置代理要改 Docker 的配置,
+&lt;/p&gt;
+
+&lt;p&gt;
+而且需要重启,也不能灵活的开关代理.
+&lt;/p&gt;
+
+&lt;p&gt;
+使用 Docker in Docker 可以很好的解决这个问题.
+&lt;/p&gt;
+
+
+
+&lt;ol class="org-ol"&gt;
+&lt;li&gt;&lt;p&gt;
+拉取 docker in docker 镜像必设置代理变量
+&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  docker run -it -d --privileged --name docker-proxy-download -e &lt;span class="nv"&gt;http_proxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"http://192.168.16.115:1080"&lt;/span&gt; -e &lt;span class="nv"&gt;https_proxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"http://192.168.16.115:1080"&lt;/span&gt; -v /data:/data docker:dind
+&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;
+进入 Docker 容器内
+&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  docker &lt;span class="nb"&gt;exec&lt;/span&gt; -it docker-proxy-download sh
+&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;
+登录 Nvidia 仓库
+&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  docker login nvcr.io
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+输入用户名密码
+&lt;/p&gt;
+
+&lt;p&gt;
+Username: $oauthtoken
+&lt;/p&gt;
+
+&lt;p&gt;
+Password: &lt;code&gt;your password&lt;/code&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;
+拉取镜像
+&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  docker pull nvcr.io/nvidia/deepstream:4.0.1-19.09-iot
+&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;
+导出镜像至数据卷
+&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  &lt;span class="nb"&gt;cd&lt;/span&gt; /data &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; docker save -o d4iot.tar nvcr.io/nvidia/deepstream:4.0.1-19.09-iot
+&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;
+在宿主机导入镜像
+&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  docker load -i d4iot.tar
+&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;</description><category>deepstream</category><category>docker</category><category>nvidia</category><guid>https://SuJiKiNen.github.io/posts/shi-yong-dai-li-xia-zai-nvidia-deepstreamjing-xiang/</guid><pubDate>Sun, 01 Mar 2020 04:10:01 GMT</pubDate></item></channel></rss>

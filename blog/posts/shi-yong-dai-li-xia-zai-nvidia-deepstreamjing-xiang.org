@@ -1,0 +1,57 @@
+#+BEGIN_COMMENT
+.. title: 使用代理下载 Nvidia Deepstream 镜像
+.. slug: shi-yong-dai-li-xia-zai-nvidia-deepstreamjing-xiang
+.. date: 2020-03-01 12:10:01 UTC+08:00
+.. tags: deepstream,nvidia,docker
+.. category:
+.. link:
+.. description:
+.. type: text
+
+#+END_COMMENT
+
+Deepstream 镜像很大,特别是 ~-devel~ 结尾的开发镜像
+
+必须要设置代理才行,通常设置代理要改 Docker 的配置,
+
+而且需要重启,也不能灵活的开关代理.
+
+使用 Docker in Docker 可以很好的解决这个问题.
+
+
+
+1. 拉取 docker in docker 镜像必设置代理变量
+  #+begin_src sh
+  docker run -it -d --privileged --name docker-proxy-download -e http_proxy="http://192.168.16.115:1080" -e https_proxy="http://192.168.16.115:1080" -v /data:/data docker:dind
+  #+end_src
+
+2. 进入 Docker 容器内
+  #+begin_src sh
+  docker exec -it docker-proxy-download sh
+  #+end_src
+
+3. 登录 Nvidia 仓库
+  #+begin_src sh
+  docker login nvcr.io
+  #+end_src
+
+  输入用户名密码
+
+  Username: $oauthtoken
+
+  Password: =your password=
+
+4. 拉取镜像
+  #+begin_src sh
+  docker pull nvcr.io/nvidia/deepstream:4.0.1-19.09-iot
+  #+end_src
+
+5. 导出镜像至数据卷
+  #+begin_src sh
+  cd /data && docker save -o d4iot.tar nvcr.io/nvidia/deepstream:4.0.1-19.09-iot
+  #+end_src
+
+6. 在宿主机导入镜像
+  #+begin_src sh
+  docker load -i d4iot.tar
+  #+end_src

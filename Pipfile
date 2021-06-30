@@ -6,7 +6,8 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-nikola = {index = "http://mirrors.aliyun.com/pypi/simple/",version = "*"}
+nikola = {extras = ["all"], version = "*", index = "http://mirrors.aliyun.com/pypi/simple/"}
+ghp-import = {version = "*", index = "http://mirrors.aliyun.com/pypi/simple/"}
 
 [requires]
 python_version = "3.6"

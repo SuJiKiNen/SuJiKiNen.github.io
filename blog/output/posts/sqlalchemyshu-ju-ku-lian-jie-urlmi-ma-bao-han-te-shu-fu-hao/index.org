@@ -1,0 +1,20 @@
+#+BEGIN_COMMENT
+.. title: sqlalchemy 数据库连接 url 密码包含特殊符号@
+.. slug: sqlalchemyshu-ju-ku-lian-jie-urlmi-ma-bao-han-te-shu-fu-hao
+.. date: 2021-06-30 21:56:20 UTC+08:00
+.. tags: python,sqlalchemy
+.. category:
+.. link:
+.. description:
+.. type: text
+
+#+END_COMMENT
+
+从 ~1.4.17~ 开始 sqlalchemy 密码中包含 =@= 字符需要，进行 =urlencode= 。
+
+Solution:
+  #+begin_src Python
+  urllib.parse.quote_plus(os.environ.get("DB_PASSWORD"))
+  #+end_src
+
+详见[[https://github.com/sqlalchemy/sqlalchemy/discussions/6568][这个issue]]。

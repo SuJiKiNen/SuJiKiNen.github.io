@@ -7,50 +7,58 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://SuJiKiNen.github.io/</loc>
-  <lastmod>2020-03-01T04:59:00Z</lastmod>
+  <lastmod>2021-06-30T14:03:00Z</lastmod>
  </url>
  <url>
   <loc>https://SuJiKiNen.github.io/2019/</loc>
-  <lastmod>2020-03-01T04:59:00Z</lastmod>
+  <lastmod>2021-06-30T13:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://SuJiKiNen.github.io/2020/</loc>
-  <lastmod>2020-03-01T04:59:00Z</lastmod>
+  <lastmod>2021-06-30T13:38:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://SuJiKiNen.github.io/2021/</loc>
+  <lastmod>2021-06-30T14:03:00Z</lastmod>
  </url>
  <url>
   <loc>https://SuJiKiNen.github.io/archive.html</loc>
-  <lastmod>2020-03-01T04:59:00Z</lastmod>
+  <lastmod>2021-06-30T14:18:00Z</lastmod>
  </url>
  <url>
   <loc>https://SuJiKiNen.github.io/categories/</loc>
-  <lastmod>2020-03-01T04:59:00Z</lastmod>
+  <lastmod>2021-06-30T14:03:00Z</lastmod>
  </url>
  <url>
   <loc>https://SuJiKiNen.github.io/categories/deepstream/</loc>
-  <lastmod>2020-03-01T04:59:00Z</lastmod>
+  <lastmod>2021-06-30T13:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://SuJiKiNen.github.io/categories/docker/</loc>
-  <lastmod>2020-03-01T04:59:00Z</lastmod>
+  <lastmod>2021-06-30T13:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://SuJiKiNen.github.io/categories/nvidia/</loc>
-  <lastmod>2020-03-01T04:59:00Z</lastmod>
+  <lastmod>2021-06-30T13:38:00Z</lastmod>
  </url>
  <url>
-  <loc>https://SuJiKiNen.github.io/galleries/</loc>
-  <lastmod>2020-02-04T12:11:00Z</lastmod>
+  <loc>https://SuJiKiNen.github.io/categories/python/</loc>
+  <lastmod>2021-06-30T14:03:00Z</lastmod>
  </url>
  <url>
-  <loc>https://SuJiKiNen.github.io/listings/</loc>
-  <lastmod>2020-02-04T12:11:00Z</lastmod>
+  <loc>https://SuJiKiNen.github.io/categories/sqlalchemy/</loc>
+  <lastmod>2021-06-30T14:03:00Z</lastmod>
  </url>
  <url>
   <loc>https://SuJiKiNen.github.io/posts/fei-rootyong-hu-dockergua-zai-juan-hou-xie-de-wen-jian-wei-rootquan-xian/</loc>
-  <lastmod>2020-03-01T04:59:00Z</lastmod>
+  <lastmod>2021-06-30T13:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://SuJiKiNen.github.io/posts/shi-yong-dai-li-xia-zai-nvidia-deepstreamjing-xiang/</loc>
-  <lastmod>2020-03-01T04:59:00Z</lastmod>
+  <lastmod>2021-06-30T13:38:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://SuJiKiNen.github.io/posts/sqlalchemyshu-ju-ku-lian-jie-urlmi-ma-bao-han-te-shu-fu-hao/</loc>
+  <lastmod>2021-06-30T14:03:00Z</lastmod>
  </url>
 </urlset>

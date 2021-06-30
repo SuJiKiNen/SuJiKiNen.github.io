@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SuJiKiNen's Blog (关于文章 python)</title><link>https://SuJiKiNen.github.io/</link><description></description><atom:link href="https://SuJiKiNen.github.io/categories/python.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2021 &lt;a href="mailto:sujikinen@[dot]gmail[dot]com"&gt;SuJiKiNen&lt;/a&gt; </copyright><lastBuildDate>Wed, 30 Jun 2021 14:06:47 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>sqlalchemy 数据库连接 url 密码包含特殊符号@</title><link>https://SuJiKiNen.github.io/posts/sqlalchemyshu-ju-ku-lian-jie-urlmi-ma-bao-han-te-shu-fu-hao/</link><dc:creator>SuJiKiNen</dc:creator><description>&lt;p&gt;
+从 &lt;code&gt;1.4.17&lt;/code&gt; 开始 sqlalchemy 密码中包含 &lt;code&gt;@&lt;/code&gt; 字符需要，进行 &lt;code&gt;urlencode&lt;/code&gt; 。
+&lt;/p&gt;
+
+&lt;p&gt;
+Solution:
+&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  &lt;span class="n"&gt;urllib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;parse&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;quote_plus&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"DB_PASSWORD"&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;
+详见&lt;a href="https://github.com/sqlalchemy/sqlalchemy/discussions/6568"&gt;这个issue&lt;/a&gt;。
+&lt;/p&gt;</description><category>python</category><category>sqlalchemy</category><guid>https://SuJiKiNen.github.io/posts/sqlalchemyshu-ju-ku-lian-jie-urlmi-ma-bao-han-te-shu-fu-hao/</guid><pubDate>Wed, 30 Jun 2021 13:56:20 GMT</pubDate></item></channel></rss>
